@@ -1,11 +1,30 @@
 import React from "react"
 import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
-import App from "./App"
 import { store } from "./app/store"
 import "./index.css"
+import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import Movies from "./Movies"
+import Movie from "./Movie"
+import LoginForm from "./LoginForm"
+import Header from "./Header"
 
 const container = document.getElementById("root")
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Movies />,
+  },
+  {
+    path: "/:id",
+    element: <Movie />,
+  },
+  {
+    path: "/login",
+    element: <LoginForm />,
+  },
+])
 
 if (container) {
   const root = createRoot(container)
@@ -13,7 +32,8 @@ if (container) {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <App />
+        <Header />
+        <RouterProvider router={router} />
       </Provider>
     </React.StrictMode>,
   )

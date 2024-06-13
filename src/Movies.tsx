@@ -1,9 +1,8 @@
 import { Grid } from "@mui/material"
-import "./App.css"
 import MovieCard from "./MovieCard"
 import { useGetMoviesQuery } from "./services/movies"
 
-const App = () => {
+const Movies = () => {
   const { data, isFetching, isLoading, isSuccess } = useGetMoviesQuery()
 
   return (
@@ -23,4 +22,4 @@ const App = () => {
   )
 }
 
-export default App
+export default Movies
