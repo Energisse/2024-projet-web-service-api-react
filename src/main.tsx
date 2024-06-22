@@ -3,26 +3,56 @@ import { createRoot } from "react-dom/client"
 import { Provider } from "react-redux"
 import { store } from "./app/store"
 import "./index.css"
-import { RouterProvider, createBrowserRouter } from "react-router-dom"
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom"
 import Movies from "./Movies"
 import Movie from "./Movie"
 import LoginForm from "./LoginForm"
 import Header from "./Header"
+import Directors from "./Directors"
+import { Box } from "@mui/material"
+import Actors from "./Actors"
+import FormCharacters from "./FormCharacters"
 
 const container = document.getElementById("root")
 
+const Layout = () => (
+  <>
+    <Header />
+    <Box p={1}>
+      <Outlet />
+    </Box>
+  </>
+)
+
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Movies />,
-  },
-  {
-    path: "/:id",
-    element: <Movie />,
-  },
-  {
-    path: "/login",
-    element: <LoginForm />,
+    element: <Layout />,
+    children: [
+      {
+        path: "/",
+        element: <Movies />,
+      },
+      {
+        path: "/directors",
+        element: <Directors />,
+      },
+      {
+        path: "/test",
+        element: <FormCharacters />,
+      },
+      {
+        path: "/actors",
+        element: <Actors />,
+      },
+      {
+        path: "/:id",
+        element: <Movie />,
+      },
+      {
+        path: "/login",
+        element: <LoginForm />,
+      },
+    ],
   },
 ])
 
@@ -32,7 +62,6 @@ if (container) {
   root.render(
     <React.StrictMode>
       <Provider store={store}>
-        <Header />
         <RouterProvider router={router} />
       </Provider>
     </React.StrictMode>,

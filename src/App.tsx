@@ -1,24 +1,28 @@
-import { Grid } from "@mui/material"
+import { Alert, Grid, Skeleton } from "@mui/material"
 import "./App.css"
 import MovieCard from "./MovieCard"
 import { useGetMoviesQuery } from "./services/movies"
 
 const App = () => {
-  const { data, isFetching, isLoading, isSuccess } = useGetMoviesQuery()
+  const { data, isFetching, isError } = useGetMoviesQuery()
+
+  if (isFetching) {
+    return <Skeleton variant="rectangular" width={210} height={118} />
+  }
+
+  if (isError || !data) {
+    return <Alert severity="error">An error occurred</Alert>
+  }
 
   return (
     <div className="App">
-      {isLoading && <p>Loading...</p>}
-      {isFetching && <p>Fetching...</p>}
-      {isSuccess && data && (
-        <Grid container spacing={2} p={1}>
-          {data.map(movie => (
-            <Grid item key={movie.id}>
-              <MovieCard movie={movie} />
-            </Grid>
-          ))}
-        </Grid>
-      )}
+      <Grid container spacing={2} p={1}>
+        {data.map(movie => (
+          <Grid item key={movie.id}>
+            <MovieCard movie={movie} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   )
 }

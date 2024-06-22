@@ -1,6 +1,7 @@
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { useLoginMutation } from "./services/login"
 import { useEffect } from "react"
+import { TextField } from "@mui/material"
 
 export default function LoginForm() {
   const { control, handleSubmit, register } = useForm<{
@@ -29,10 +30,21 @@ export default function LoginForm() {
 
   return (
     <form onSubmit={onSubmit}>
-      <input {...register("username")} placeholder="Bill" />
+      <Controller
+        name="username"
+        control={control}
+        defaultValue=""
+        render={({ field }) => <TextField {...field} label="Username" />}
+      />
 
-      <input {...register("password")} placeholder="Luo" />
-
+      <Controller
+        name="password"
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <TextField {...field} label="Password" type="password" />
+        )}
+      />
       <input type="submit" />
     </form>
   )

@@ -1,7 +1,7 @@
 import { create } from '@mui/material/styles/createTransitions';
 import { api } from './api'
 
-const enhancedApi = api.injectEndpoints({
+const moviesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getMovies: builder.query<Movie[], void>({
       query: () => `movies`,
@@ -13,29 +13,18 @@ const enhancedApi = api.injectEndpoints({
       query: (id) => `movies/${id}/genres`,
     }),
     getMovieActors: builder.query<string[], number>({
-      query: (id) => `movies/${id}/actors`,
+      query: (id) => `movies/${id}/characters`,
     }),
     searchMovies: builder.query<Pick<Movie, "title" | "id">[], string>({
       query: (query) => `movies/search?query=${query}`,
     }),
-    createMovie: builder.mutation<Movie, Omit<Movie, "id">>({
-      query: (body) => ({
-        url: `movies`,
-        method: 'POST',
-        body,
-      }),
-    }),
-    updateMovie: builder.mutation<Movie, Partial<Movie> & Movie["id"]>({
-      query: (body) => ({
-        url: `movies`,
-        method: 'PUT',
-        body,
-      }),
+    getMoviesByGenre: builder.query<Movie[], string>({
+      query: (nom_du_genre) => `movies/genre/?query${nom_du_genre}`,
     }),
   }),
 })
 
-export const { useGetMoviesQuery, useGetMovieByIdQuery, useGetMovieGenresQuery, useGetMovieActorsQuery, useLazySearchMoviesQuery } = enhancedApi
+export const { useGetMoviesQuery, useGetMovieByIdQuery, useGetMovieGenresQuery, useGetMovieActorsQuery, useLazySearchMoviesQuery } = moviesApi
 
 export type Movie = {
   id: number;

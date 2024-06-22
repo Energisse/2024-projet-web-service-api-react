@@ -2,11 +2,13 @@ import {
   AppBar,
   Autocomplete,
   Button,
+  Grid,
   TextField,
   Toolbar,
   Typography,
 } from "@mui/material"
 import { useLazySearchMoviesQuery } from "./services/movies"
+import { Link } from "react-router-dom"
 
 export default function Header() {
   const [search, data] = useLazySearchMoviesQuery()
@@ -14,10 +16,21 @@ export default function Header() {
   return (
     <AppBar position="sticky">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Movies
-        </Typography>
-        <Button color="inherit">Login</Button>
+        <Grid container columnGap={2}>
+          <Typography variant="h6">
+            <Link to={"/"}>Movies</Link>
+          </Typography>
+          <Typography variant="h6">
+            <Link to={"/actors"}>Acteurs</Link>
+          </Typography>
+          <Typography variant="h6">
+            <Link to={"/directors"}>Directeurs</Link>
+          </Typography>
+          <Typography variant="h6">
+            <Link to={"/login"}>Login</Link>
+          </Typography>
+        </Grid>
+        <Typography variant="h6" sx={{ flexGrow: 1 }}></Typography>
         <Autocomplete
           disablePortal
           id="combo-box-demo"
