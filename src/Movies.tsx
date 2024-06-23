@@ -1,9 +1,14 @@
 import { Alert, Grid, Skeleton } from "@mui/material"
 import MovieCard from "./MovieCard"
-import { useGetMoviesQuery } from "./services/movies"
+import { useGetMoviesByGenreQuery, useGetMoviesQuery } from "./services/movies"
+import { useParams } from "react-router-dom"
 
 const Movies = () => {
-  const { data, isFetching, isError } = useGetMoviesQuery()
+  const { genre } = useParams<{ genre: string }>()
+
+  const action = genre ? useGetMoviesByGenreQuery : useGetMoviesQuery
+
+  let { data, isFetching, isError } = action(genre as any)
 
   if (isFetching) {
     return (

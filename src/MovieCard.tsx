@@ -35,7 +35,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
       </CardContent>
       <CardActions>
         <Button size="small">
-          <Link to={movie.id.toString()}>Learn More</Link>
+          <Link to={movie.id.toString()}>Voire plus</Link>
         </Button>
       </CardActions>
     </Card>

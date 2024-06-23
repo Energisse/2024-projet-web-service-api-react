@@ -1,5 +1,5 @@
 import { api } from './api';
-import { Gender } from './directors';
+import type { Gender } from './directors';
 
 const charactersApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -22,8 +22,8 @@ const charactersApi = api.injectEndpoints({
             }),
             invalidatesTags: ['Characters'],
         }),
-        updateCharacter: builder.mutation<Characters, { id: number, data: Partial<Omit<Characters, "id">> }>({
-            query: ({ id, data }) => ({
+        updateCharacter: builder.mutation<Characters, { id: number } & Partial<Omit<Characters, "id">>>({
+            query: ({ id, ...data }) => ({
                 url: `/characters/${id}`,
                 method: 'PUT',
                 body: data,
@@ -51,4 +51,4 @@ export type Characters = {
 }
 
 
-export const { useGetCharactersQuery, useGetCharacterQuery, useCreateCharacterMutation, useUpdateCharacterMutation, useDeleteCharacterMutation } = charactersApi
+export const { useGetCharactersQuery, useGetCharacterQuery, useCreateCharacterMutation, useUpdateCharacterMutation, useDeleteCharacterMutation, useLazyGetCharacterQuery } = charactersApi

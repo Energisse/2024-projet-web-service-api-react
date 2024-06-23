@@ -12,6 +12,7 @@ import Directors from "./Directors"
 import { Box } from "@mui/material"
 import Actors from "./Actors"
 import FormCharacters from "./FormCharacters"
+import Characters from "./Characters"
 
 const container = document.getElementById("root")
 
@@ -33,11 +34,19 @@ const router = createBrowserRouter([
         element: <Movies />,
       },
       {
+        path: "/movies/:genre",
+        element: <Movies />,
+      },
+      {
         path: "/directors",
         element: <Directors />,
       },
       {
-        path: "/test",
+        path: "/character",
+        element: <FormCharacters />,
+      },
+      {
+        path: "/character/:id",
         element: <FormCharacters />,
       },
       {
@@ -51,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginForm />,
+      },
+      {
+        path: "/characters",
+        element: <Characters />,
       },
     ],
   },

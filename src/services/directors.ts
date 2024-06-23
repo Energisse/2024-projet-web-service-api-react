@@ -17,8 +17,10 @@ const directorsApi = api.injectEndpoints({
 })
 
 export enum Gender {
-  "Femme" = 1,
+  "Autre" = 0,
+  "Femme",
   "Homme",
+  "JSP"
 }
 
 export type Director = {

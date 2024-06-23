@@ -19,12 +19,12 @@ const moviesApi = api.injectEndpoints({
       query: (query) => `movies/search?query=${query}`,
     }),
     getMoviesByGenre: builder.query<Movie[], string>({
-      query: (nom_du_genre) => `movies/genre/?query${nom_du_genre}`,
+      query: (nom_du_genre) => `movies/genre?query=${nom_du_genre}`,
     }),
   }),
 })
 
-export const { useGetMoviesQuery, useGetMovieByIdQuery, useGetMovieGenresQuery, useGetMovieActorsQuery, useLazySearchMoviesQuery } = moviesApi
+export const { useGetMoviesQuery, useGetMovieByIdQuery, useGetMovieGenresQuery, useGetMovieActorsQuery, useLazySearchMoviesQuery, useGetMoviesByGenreQuery } = moviesApi
 
 export type Movie = {
   id: number;

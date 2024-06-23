@@ -1,10 +1,10 @@
 import { useGetDirectorsQuery, Gender } from "./services/directors"
 import MUIDataTable from "mui-datatables"
-import FemaleIcon from "@mui/icons-material/Female"
-import MaleIcon from "@mui/icons-material/Male"
+
 import { format } from "date-fns"
 import { TableCell, TableRow } from "@mui/material"
 import DirectorsMovies from "./DirectorsMovies"
+import SexeIcon from "./SexeIcon"
 
 export default function Directors() {
   const { data } = useGetDirectorsQuery()
@@ -22,8 +22,7 @@ export default function Directors() {
       name: "gender",
       label: "Sexe",
       options: {
-        customBodyRender: (value: Gender) =>
-          value === Gender.Femme ? <FemaleIcon /> : <MaleIcon />,
+        customBodyRender: (value: Gender) => <SexeIcon sexe={value} />,
         filter: true,
         sort: true,
       },
